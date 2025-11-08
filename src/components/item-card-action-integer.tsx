@@ -71,7 +71,7 @@ export function ItemCardActionInteger({ title, unit }: ItemCardIntegerProps) {
 		<CardAction className="space-y-5 w-full">
 			<div className="space-y-2">
 				<Label htmlFor="addCount">Add {unit}</Label>
-				<span className="flex flex-row gap-2 w-max">
+				<span className="flex flex-row gap-2 w-full">
 					<Input
 						type="number"
 						placeholder="3.75"
@@ -83,7 +83,7 @@ export function ItemCardActionInteger({ title, unit }: ItemCardIntegerProps) {
 			</div>
 
 			<div className="space-y-2">
-				<Label htmlFor="count">ea</Label>
+				<Label htmlFor="count">{unit}</Label>
 				<span className="flex flex-row justify-between items-center mx-1">
 					<p className="px-2">{count} {unit}</p>
 					<Button onClick={prevCount} variant="secondary">

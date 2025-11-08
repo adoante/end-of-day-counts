@@ -75,7 +75,7 @@ function App() {
 						<NavigationMenuItem>
 							<NavigationMenuTrigger>Items</NavigationMenuTrigger>
 							<NavigationMenuContent
-								className="text-left min-w-sm"
+								className="max-h-[80vh] overflow-y-auto p-4 text-left mx-auto"
 							>
 								<ul className="grid gap-2">
 									{items.map((title) => (
