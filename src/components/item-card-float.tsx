@@ -1,21 +1,9 @@
 import {
 	Card,
-	CardAction,
 	CardDescription,
 	CardHeader,
 	CardTitle,
 } from "../components/ui/card"
-import { Label } from "../components/ui/label"
-import { Input } from "../components/ui/input"
-import { Button } from "../components/ui/button"
-import { Separator } from "../components/ui/separator"
-import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from "../components/ui/collapsible"
-
-import { Plus, ChevronsUpDown, Undo2 } from "lucide-react"
 
 import { ItemCardActionFloat } from "./item-card-action-float"
 

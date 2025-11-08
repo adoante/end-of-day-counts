@@ -28,7 +28,6 @@ import {
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-	NavigationMenuViewport
 } from "@/components/ui/navigation-menu"
 
 function App() {
