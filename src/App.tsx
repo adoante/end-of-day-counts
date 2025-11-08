@@ -1,3 +1,4 @@
+
 import './App.css'
 import { ThemeProvider } from './components/theme-provider'
 import { ModeToggle } from './components/mode-toggle'
@@ -20,6 +21,15 @@ import { ItemCardIntegerIntegerFloat } from './components/item-card-float-intege
 import { ItemCardIntegerIntegerIntegerFloat } from './components/item-card-float-integer-integer-integer'
 import { ItemCardIntegerInteger } from './components/item-card-integer-integer'
 import { ItemcardsTable } from "./components/item-card-table"
+import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+	NavigationMenuViewport
+} from "@/components/ui/navigation-menu"
 
 function App() {
 	function clearAllItemCardData() {
@@ -28,154 +38,253 @@ function App() {
 				localStorage.removeItem(key);
 			}
 		});
-		// optional: trigger re-render or notify user
-		window.location.reload(); // simplest way to refresh UI
+		window.location.reload();
 	}
+
+	const items = [
+		"Beef Patty 6oz",
+		"Chili",
+		"Beef Patty 3_2oz",
+		"Beef Patty 1_6oz Slider",
+		"Plant Based Patty 4oz",
+		"Flattened Chicken",
+		"Fried Chicken",
+		"Chicken Breast Chunk",
+		"Ground Turkey",
+		"Carnitas",
+		"Baja Chicken",
+		"Chicken Tiki",
+		"Chicken Wings",
+		"Island Fish",
+		"Garden Burger",
+		"Chicken Soup",
+		"Brownie",
+		"Kona Pie",
+		"Butter Cake",
+	];
+
+	// helper for safe id
+	const toId = (name: string) =>
+		name.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
 
 	return (
 		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-			<main className="space-y-5">
-				<nav className="flex flex-row items-center justify-between">
-					<h1>E.O.D. Counts</h1>
-					<ModeToggle />
-				</nav>
+			<nav className="flex flex-row items-center justify-between sticky top-0 bg-background/80 backdrop-blur-md z-50 py-5 px-5">
 
-				<ItemCardIntegerIntegerFloat
-					title="Beef Patty 6oz"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="patty"
-				/>
+				<NavigationMenu>
+					<NavigationMenuList>
+						<NavigationMenuItem>
+							<NavigationMenuTrigger>Items</NavigationMenuTrigger>
+							<NavigationMenuContent
+								className="text-left min-w-sm"
+							>
+								<ul className="grid gap-2">
+									{items.map((title) => (
+										<li key={title}>
+											<NavigationMenuLink asChild>
+												<Button
+													variant="secondary"
+													asChild
+													className="w-full"
+												>
+													<a href={`#${toId(title)}`}>{title}</a>
+												</Button>
+											</NavigationMenuLink>
+										</li>
+									))}
+								</ul>
+							</NavigationMenuContent>
+						</NavigationMenuItem>
+					</NavigationMenuList>
+				</NavigationMenu>
 
-				<ItemCardFloat
-					title="Chili"
-					desc=""
-					weightUnit="lbs"
-				/>
+				<ModeToggle />
+			</nav>
 
-				<ItemCardIntegerIntegerFloat
-					title="Beef Patty 3.2oz"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="ea"
-				/>
+			<main className="space-y-5 mx-5">
+				{/* each card wrapped in its own div with id */}
+				<div id={toId("Beef Patty 6oz")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Beef Patty 6oz"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="patty"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerFloat
-					title="Beef Patty 1.6oz Slider"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="ea"
-				/>
+				<div id={toId("Chili")} className="scroll-mt-24">
+					<ItemCardFloat
+						title="Chili"
+						desc=""
+						weightUnit="lbs"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerFloat
-					title="Plant-Based Patty 4oz"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="ea"
-				/>
+				<div id={toId("Beef Patty 3_2oz")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Beef Patty 3_2oz"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="ea"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerIntegerFloat
-					title="Flattened Chicken"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="ea"
-					countUnit3="4oz"
-				/>
+				<div id={toId("Beef Patty 1_6oz Slider")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Beef Patty 1_6oz Slider"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="ea"
+					/>
+				</div>
 
-				<ItemCardInteger
-					title="Fried Chicken"
-					desc=""
-					countUnit="ea"
-				/>
+				<div id={toId("Plant Based Patty 4oz")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Plant Based Patty 4oz"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="ea"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerFloat
-					title="Chicken Breast Chunk"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="spicy"
-				/>
+				<div id={toId("Flattened Chicken")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerIntegerFloat
+						title="Flattened Chicken"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="ea"
+						countUnit3="4oz"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerFloat
-					title="Ground Turkey"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="chubs"
-				/>
+				<div id={toId("Fried Chicken")} className="scroll-mt-24">
+					<ItemCardInteger
+						title="Fried Chicken"
+						desc=""
+						countUnit="ea"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerFloat
-					title="Carnitas"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="bags"
-				/>
+				<div id={toId("Chicken Breast Chunk")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Chicken Breast Chunk"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="spicy"
+					/>
+				</div>
 
-				<ItemCardIntegerFloat
-					title="Chicken Tiki"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-				/>
+				<div id={toId("Ground Turkey")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Ground Turkey"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="chubs"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerIntegerFloat
-					title="Chicken Wings"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="bags"
-					countUnit3="small order"
-				/>
+				<div id={toId("Carnitas")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Carnitas"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="bags"
+					/>
+				</div>
 
-				<ItemCardIntegerFloat
-					title="Island Fish"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-				/>
+				<div id={toId("Baja Chicken")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Baja Chicken"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="bags"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerFloat
-					title="Garden Burger"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="ea"
-				/>
+				<div id={toId("Chicken Tiki")} className="scroll-mt-24">
+					<ItemCardIntegerFloat
+						title="Chicken Tiki"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+					/>
+				</div>
 
-				<ItemCardIntegerIntegerFloat
-					title="Chicken Soup"
-					desc=""
-					weightUnit="lbs"
-					countUnit="case"
-					countUnit2="bag"
-				/>
+				<div id={toId("Chicken Wings")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerIntegerFloat
+						title="Chicken Wings"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="bags"
+						countUnit3="small order"
+					/>
+				</div>
 
-				<ItemCardIntegerInteger
-					title="Brownie"
-					desc=""
-					countUnit="ea"
-					countUnit2="case"
-				/>
+				<div id={toId("Island Fish")} className="scroll-mt-24">
+					<ItemCardIntegerFloat
+						title="Island Fish"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+					/>
+				</div>
 
-				<ItemCardIntegerInteger
-					title="Kona Pie"
-					desc=""
-					countUnit="ea"
-					countUnit2="box"
-				/>
+				<div id={toId("Garden Burger")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Garden Burger"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="ea"
+					/>
+				</div>
 
-				<ItemCardIntegerInteger
-					title="Butter Cake"
-					desc=""
-					countUnit="ea"
-					countUnit2="case"
-				/>
+				<div id={toId("Chicken Soup")} className="scroll-mt-24">
+					<ItemCardIntegerIntegerFloat
+						title="Chicken Soup"
+						desc=""
+						weightUnit="lbs"
+						countUnit="case"
+						countUnit2="bag"
+					/>
+				</div>
+
+				<div id={toId("Brownie")} className="scroll-mt-24">
+					<ItemCardIntegerInteger
+						title="Brownie"
+						desc=""
+						countUnit="ea"
+						countUnit2="case"
+					/>
+				</div>
+
+				<div id={toId("Kona Pie")} className="scroll-mt-24">
+					<ItemCardIntegerInteger
+						title="Kona Pie"
+						desc=""
+						countUnit="ea"
+						countUnit2="box"
+					/>
+				</div>
+
+				<div id={toId("Butter Cake")} className="scroll-mt-24">
+					<ItemCardIntegerInteger
+						title="Butter Cake"
+						desc=""
+						countUnit="ea"
+						countUnit2="case"
+					/>
+				</div>
 
 				<AlertDialog>
 					<AlertDialogTrigger asChild>
@@ -201,9 +310,7 @@ function App() {
 					</AlertDialogContent>
 				</AlertDialog>
 
-
 				<ItemcardsTable />
-
 			</main>
 		</ThemeProvider >
 	)

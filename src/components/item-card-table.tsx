@@ -39,7 +39,7 @@ export function ItemcardsTable(): React.ReactNode {
 		loadItems();
 	}, []);
 
-	const columns: string[] = ["lbs", "case", "ea", "patty", "4oz", "spicy", "chubs", "misc"];
+	const columns: string[] = ["lbs", "case", "ea", "patty", "4oz", "spicy", "chubs", "box", "bags"];
 
 	// ✅ Mapping from storage keys to display names
 	const nameMap: Record<string, string> = {
@@ -47,8 +47,9 @@ export function ItemcardsTable(): React.ReactNode {
 		chili: "Chili",
 		beef_patty_3_2oz: "Beef Patty 3.2oz",
 		beef_patty_1_6oz_slider: "Beef Patty Sliders 1.6oz",
-		plant_based_patty: "Plant-Based Patty",
+		plant_based_patty_4oz: "Plant-Based Patty 4oz",
 		flattened_chicken: "Flattened Chicken",
+		fried_chicken: "Fried Chicken",
 		chicken_breast_chunk: "Chick Breast Chunk",
 		ground_turkey: "Ground Turkey",
 		baja_chicken: "Baja Chicken",
@@ -69,8 +70,9 @@ export function ItemcardsTable(): React.ReactNode {
 		"Chili",
 		"Beef Patty 3.2oz",
 		"Beef Patty Sliders 1.6oz",
-		"Plant-Based Patty",
+		"Plant-Based Patty 4oz",
 		"Flattened Chicken",
+		"Fried Chicken",
 		"Chick Breast Chunk",
 		"Ground Turkey",
 		"Baja Chicken",
@@ -106,10 +108,10 @@ export function ItemcardsTable(): React.ReactNode {
 				Generate Table
 			</Button>
 
-			<table>
-				<thead>
+			<table className="text-left border">
+				<thead className="bg-foreground text-background">
 					<tr>
-						<th>Name</th>
+						<th className="px-2 py-1">Name</th>
 						<th>Values</th>
 					</tr>
 				</thead>
@@ -118,8 +120,8 @@ export function ItemcardsTable(): React.ReactNode {
 						const displayName = nameMap[name] ?? name.replace(/_/g, " ");
 						return (
 							<tr key={name}>
-								<td>{displayName}</td>
-								<td>
+								<td className="border px-2 py-1">{displayName}</td>
+								<td className="border px-2 py-1">
 									{columns
 										.filter((col) => data[col] !== undefined)
 										.map((col) => (
