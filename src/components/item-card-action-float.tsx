@@ -23,7 +23,7 @@ interface ItemCardFloatProps {
 export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 	const storageKey = `itemcard_${title.replace(/\s+/g, "_").toLowerCase()}`
 
-	const [addLbs, setAddLbs] = useState(0.0)
+	const [addLbs, setAddLbs] = useState<number>(0.0)
 
 	const [weight, setWeight] = useState<number>(() => {
 		const saved = localStorage.getItem(`${storageKey}_${unit}`)
@@ -75,8 +75,11 @@ export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 					<Input
 						type="number"
 						placeholder="3.75"
-						value={addLbs}
-						onChange={(e) => setAddLbs(parseFloat(e.target.value) || 0)}
+						value={addLbs !== null ? addLbs : ""}
+						onChange={(e) => {
+							const val = e.target.value;
+							setAddLbs(val === "" ? null : parseFloat(val));
+						}}
 					/>
 					<Button onClick={() => addWeight(addLbs)}><Plus /></Button>
 				</span>

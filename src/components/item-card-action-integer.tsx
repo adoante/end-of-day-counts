@@ -74,9 +74,12 @@ export function ItemCardActionInteger({ title, unit }: ItemCardIntegerProps) {
 				<span className="flex flex-row gap-2 w-full">
 					<Input
 						type="number"
-						placeholder="3.75"
-						value={addCnt}
-						onChange={(e) => setAddCnt(parseFloat(e.target.value) || 0)}
+						placeholder="2"
+						value={addCnt !== null ? addCnt : ""}
+						onChange={(e) => {
+							const val = e.target.value;
+							setAddCnt(val === "" ? null : parseFloat(val));
+						}}
 					/>
 					<Button onClick={() => addCount(addCnt)}><Plus /></Button>
 				</span>
