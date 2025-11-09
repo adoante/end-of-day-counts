@@ -39,7 +39,7 @@ export function ItemcardsTable(): React.ReactNode {
 		loadItems();
 	}, []);
 
-	const columns: string[] = ["lbs", "case", "ea", "patty", "4oz", "spicy", "chubs", "box", "bags"];
+	const columns: string[] = ["lbs", "case", "ea", "patty", "4oz", "spicy", "chubs", "box", "bags", "small order"];
 
 	// ✅ Mapping from storage keys to display names
 	const nameMap: Record<string, string> = {
