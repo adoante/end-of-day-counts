@@ -29,6 +29,7 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
+import { ItemCardFloatFloatInteger } from './components/item-card-float-float-integer'
 
 function App() {
 	function clearAllItemCardData() {
@@ -170,13 +171,15 @@ function App() {
 				</div>
 
 				<div id={toId("Chicken Breast Chunk")} className="scroll-mt-24">
-					<ItemCardIntegerIntegerFloat
+					<ItemCardFloatFloatInteger
 						title="Chicken Breast Chunk"
 						desc=""
 						weightUnit="lbs"
 						countUnit="case"
-						countUnit2="spicy"
+						weightUnit2="spicy"
 					/>
+
+
 				</div>
 
 				<div id={toId("Ground Turkey")} className="scroll-mt-24">

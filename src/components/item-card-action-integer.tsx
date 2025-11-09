@@ -22,7 +22,7 @@ interface ItemCardIntegerProps {
 export function ItemCardActionInteger({ title, unit }: ItemCardIntegerProps) {
 	const storageKey = `itemcard_${title.replace(/\s+/g, "_").toLowerCase()}`
 
-	const [addCnt, setAddCnt] = useState(0.0)
+	const [addCnt, setAddCnt] = useState<number | null>(null)
 
 	const [count, setCount] = useState<number>(() => {
 		const saved = localStorage.getItem(`${storageKey}_${unit}`)
@@ -81,7 +81,7 @@ export function ItemCardActionInteger({ title, unit }: ItemCardIntegerProps) {
 							setAddCnt(val === "" ? null : parseFloat(val));
 						}}
 					/>
-					<Button onClick={() => addCount(addCnt)}><Plus /></Button>
+					<Button onClick={() => addCount(addCnt || 0)}><Plus /></Button>
 				</span>
 			</div>
 
