@@ -70,7 +70,7 @@ export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 	return (
 		<CardAction className="space-y-5 w-full">
 			<div className="space-y-2">
-				<Label htmlFor="addWeight">Add lbs</Label>
+				<Label htmlFor="addWeight">Add {unit}</Label>
 				<span className="flex flex-row gap-2 w-full">
 					<Input
 						type="number"
@@ -86,7 +86,7 @@ export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 			</div>
 
 			<div className="space-y-2">
-				<Label htmlFor="weight">lbs</Label>
+				<Label htmlFor="weight">{unit}</Label>
 				<span className="flex flex-row justify-between items-center mx-1">
 					<p className="px-2">{weight} lbs</p>
 					<Button onClick={prevWeight} variant="secondary">

@@ -257,7 +257,7 @@ function App() {
 						desc=""
 						weightUnit="lbs"
 						countUnit="case"
-						countUnit2="bag"
+						countUnit2="bags"
 					/>
 				</div>
 
