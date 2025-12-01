@@ -1,16 +1,10 @@
 import {
 	CardAction,
 } from "../components/ui/card"
-import { Label } from "../components/ui/label"
 import { Input } from "../components/ui/input"
-import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from "../components/ui/collapsible"
 import { Button } from "../components/ui/button"
 
-import { Plus, ChevronsUpDown, Undo2 } from "lucide-react"
+import { Plus, Undo2 } from "lucide-react"
 
 import { useState, useEffect } from "react"
 
