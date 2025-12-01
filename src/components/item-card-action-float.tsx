@@ -23,7 +23,7 @@ interface ItemCardFloatProps {
 export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 	const storageKey = `itemcard_${title.replace(/\s+/g, "_").toLowerCase()}`
 
-	const [addLbs, setAddLbs] = useState<number | null>(0.0)
+	const [addLbs, setAddLbs] = useState<number | null>()
 
 	const [weight, setWeight] = useState<number>(() => {
 		const saved = localStorage.getItem(`${storageKey}_${unit}`)
@@ -51,6 +51,7 @@ export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 	function addWeight(lbs: number) {
 		setHistory(prev => [...prev, weight])
 		setWeight(prev => prev + lbs)
+        setAddLbs(null)
 	}
 
 	function subWeight(lbs: number) {
@@ -69,33 +70,28 @@ export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 
 	return (
 		<CardAction className="space-y-5 w-full">
-			<div className="space-y-2">
-				<Label htmlFor="addWeight">Add {unit}</Label>
-				<span className="flex flex-row gap-2 w-full">
-					<Input
+            <h3>{unit}</h3>
+            <div className="flex flex-row items-center justify-between">
+    			<span className="flex flex-row w-7/12 gap-2">
+	    			<Input
 						type="number"
-						placeholder="3.75"
-						value={addLbs !== null ? addLbs : ""}
-						onChange={(e) => {
-							const val = e.target.value;
-							setAddLbs(val === "" ? null : parseFloat(val));
-						}}
+	        			placeholder="3.75"
+			    		value={addLbs !== null ? addLbs : ""}
+				    	onChange={(e) => {
+					    	const val = e.target.value;
+						    setAddLbs(val === "" ? null : parseFloat(val));
+					    }}
 					/>
-					<Button onClick={() => addWeight(addLbs || 0)}><Plus /></Button>
-				</span>
-			</div>
+				    <Button onClick={() => addWeight(addLbs || 0)}><Plus /></Button>
+				    <Button onClick={prevWeight} variant="secondary">
+					    <Undo2 />
+				    </Button>
+			    </span>
 
-			<div className="space-y-2">
-				<Label htmlFor="weight">{unit}</Label>
-				<span className="flex flex-row justify-between items-center mx-1">
-					<p className="px-2">{weight} lbs</p>
-					<Button onClick={prevWeight} variant="secondary">
-						<Undo2 />
-					</Button>
-				</span>
-			</div>
+                <p className="px-2 text-4xl text-center w-min">{weight}</p>
+		    </div>
 
-			<Collapsible className="space-y-5">
+			<Collapsible className="space-y-5 flex flex-col">
 
 				<CollapsibleTrigger asChild>
 					<Button variant="outline">
@@ -104,6 +100,17 @@ export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 				</CollapsibleTrigger>
 
 				<CollapsibleContent className="space-y-5">
+					<Label htmlFor="subtract">Subtract Weight - 6" Silver Pans</Label>
+					<div className="grid grid-cols-3 gap-2">
+						<Button onClick={() => subWeight(1.25)}>1/6 - 6"</Button>
+						<Button onClick={() => subWeight(1.5)}>1/4 - 6"</Button>
+						<Button onClick={() => subWeight(1.75)}>1/3 - 6"</Button>
+						<Button onClick={() => subWeight(2.5)}>1/2 - 6"</Button>
+						<Button onClick={() => subWeight(4.0)}>Full - 6"</Button>
+					</div>
+
+					<Separator />
+
 					<Label htmlFor="subtract">Subtract Weight - 4" Silver Pans</Label>
 					<div className="grid grid-cols-3 gap-2">
 						<Button onClick={() => subWeight(0.5)}>1/9 - 4"</Button>
@@ -116,16 +123,6 @@ export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 
 					<Separator />
 
-					<Label htmlFor="subtract">Subtract Weight - 6" Silver Pans</Label>
-					<div className="grid grid-cols-3 gap-2">
-						<Button onClick={() => subWeight(1.25)}>1/6 - 6"</Button>
-						<Button onClick={() => subWeight(1.5)}>1/4 - 6"</Button>
-						<Button onClick={() => subWeight(1.75)}>1/3 - 6"</Button>
-						<Button onClick={() => subWeight(2.5)}>1/2 - 6"</Button>
-						<Button onClick={() => subWeight(4.0)}>Full - 6"</Button>
-					</div>
-
-					<Separator />
 
 					<Label htmlFor="subtract">Subtract Weight - Cambro with Lid</Label>
 					<div className="grid grid-cols-3 gap-2">
@@ -139,6 +136,8 @@ export function ItemCardActionFloat({ title, unit }: ItemCardFloatProps) {
 					<Label htmlFor="subtract">Subtract Weight - Misc.</Label>
 					<div className="grid grid-cols-3 gap-2">
 						<Button onClick={() => subWeight(2.75)}>Grey Tub</Button>
+						<Button onClick={() => subWeight(4.0)}>Sheet Tray</Button>
+						<Button onClick={() => subWeight(2.5)}>White Tray</Button>
 					</div>
 				</CollapsibleContent>
 			</Collapsible>

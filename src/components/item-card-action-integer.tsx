@@ -50,11 +50,7 @@ export function ItemCardActionInteger({ title, unit }: ItemCardIntegerProps) {
 	function addCount(lbs: number) {
 		setHistory(prev => [...prev, count])
 		setCount(prev => prev + lbs)
-	}
-
-	function subCount(lbs: number) {
-		setHistory(prev => [...prev, count])
-		setCount(prev => prev - lbs)
+        setAddCnt(null)
 	}
 
 	function prevCount() {
@@ -69,9 +65,9 @@ export function ItemCardActionInteger({ title, unit }: ItemCardIntegerProps) {
 
 	return (
 		<CardAction className="space-y-5 w-full">
-			<div className="space-y-2">
-				<Label htmlFor="addCount">Add {unit}</Label>
-				<span className="flex flex-row gap-2 w-full">
+            <h3>{unit}</h3>
+            <div className="flex flex-row items-center justify-between">
+				<span className="flex flex-row gap-2 w-7/12">
 					<Input
 						type="number"
 						placeholder="2"
@@ -82,37 +78,13 @@ export function ItemCardActionInteger({ title, unit }: ItemCardIntegerProps) {
 						}}
 					/>
 					<Button onClick={() => addCount(addCnt || 0)}><Plus /></Button>
-				</span>
-			</div>
-
-			<div className="space-y-2">
-				<Label htmlFor="count">{unit}</Label>
-				<span className="flex flex-row justify-between items-center mx-1">
-					<p className="px-2">{count} {unit}</p>
 					<Button onClick={prevCount} variant="secondary">
 						<Undo2 />
 					</Button>
 				</span>
+
+				<p className="px-2 text-4xl text-center w-min">{count}</p>
 			</div>
-
-			<Collapsible className="space-y-5">
-
-				<CollapsibleTrigger asChild>
-					<Button variant="outline">
-						Subtract count <ChevronsUpDown />
-					</Button>
-				</CollapsibleTrigger>
-
-				<CollapsibleContent className="space-y-5">
-					<Label htmlFor="subtract">Subtract Count</Label>
-					<div className="grid grid-cols-3 gap-2">
-						<Button onClick={() => subCount(1)}>1</Button>
-						<Button onClick={() => subCount(2)}>2</Button>
-						<Button onClick={() => subCount(3)}>3</Button>
-					</div>
-				</CollapsibleContent>
-			</Collapsible>
-
 		</CardAction>
 	)
 }
